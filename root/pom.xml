@@ -12,6 +12,27 @@
         <module>module1</module>
         <module>module2</module>
     </modules>
-
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <module11.name>Module Eleven</module11.name>
+                <module12.name>Module Twelve</module12.name>
+                <module21.name>Module TwentyOne</module21.name>
+                <module22.name>Module TwentyTwo</module22.name>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
