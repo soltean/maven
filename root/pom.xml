@@ -12,27 +12,127 @@
         <module>module1</module>
         <module>module2</module>
     </modules>
-    <profiles>
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <module11.name>Module Eleven</module11.name>
-                <module12.name>Module Twelve</module12.name>
-                <module21.name>Module TwentyOne</module21.name>
-                <module22.name>Module TwentyTwo</module22.name>
-            </properties>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
+    <!--<build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.3</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>global.properties</file>
+                                    <type>properties</type>
+                                    <classifier>filter</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.so</groupId>
+                                    <artifactId>maven</artifactId>
+                                    <version>1.0-SNAPSHOT</version>
+                                    <classifier>filter</classifier>
+                                    <type>properties</type>
+                                    <overWrite>false</overWrite>
+                                    <destFileName>global.properties</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>
+                                ${project.basedir}
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <filters>
+            <filter>
+                global.properties
+            </filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <!--<files>
+                                <file>/Users/sergiu/global.properties</file>
+                            </files>-->
+                            <urls>
+                                <url>file:///${env.HOME}/global.properties</url>
+                            </urls>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <!-- <profiles>
+         <profile>
+             <id>local</id>
+             <activation>
+                 <activeByDefault>true</activeByDefault>
+             </activation>
+             <properties>
+                 <module11.name>Module Eleven</module11.name>
+                 <module12.name>Module Twelve</module12.name>
+                 <module21.name>Module TwentyOne</module21.name>
+                 <module22.name>Module TwentyTwo</module22.name>
+             </properties>
+             <build>
+                 <resources>
+                     <resource>
+                         <directory>src/main/resources</directory>
+                         <filtering>true</filtering>
+                     </resource>
+                 </resources>
+             </build>
+         </profile>
+     </profiles>-->
 
 </project>
